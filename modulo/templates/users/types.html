@@ -1,0 +1,52 @@
+{%extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+		<main>
+			<div class="container wrapper-25">
+				<div class="jumbotron border-15">
+					<h1 class="text-center title">Roles List</h1>
+					<div class="row justify-content-center">
+						<div class="col-md-2">
+							<a href="/users/create-type">
+								<button class="btn btn-primary" type="">
+								Create Role
+								</button>
+							</a>
+						</div><!-- /end col -->
+					</div><!-- /end body -->
+					<div class="row justify-content-center">
+						<div class="col-md-6">
+							<table style="background-color: #fff;" class="table table-bordered mt-3">
+										<thead>
+											<tr class="text-center">
+												<td>Role</td>
+												<td>Options</td>
+											</tr>
+										</thead>
+										<tbody>
+											{% if types%}
+											{% for type in types %}
+												<tr class="text-center">
+													<td>{{type.Description}}</td>
+													<td>
+														<a href="/users/update-type/{{type.LicenceType}}/">
+														<button class="btn btn-info" type="">
+															Update
+														</button></a>
+														<a href="/users/delete-type/{{type.LicenceType}}/">
+														<button class="btn btn-warning" type="">
+															Delete
+														</button></a>
+													</td>							
+												</tr>
+											{% endfor %}
+											{% endif%}
+										</tbody>
+							</table>
+						</div><!-- /end col -->
+					</div>
+				</div><!-- /end row -->
+			</div><!-- /end jumbotron -->
+		</main><!-- /end main -->
+{% endblock%}

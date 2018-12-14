@@ -1,0 +1,25 @@
+{%extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+		<main>
+			<div class="container wrapper-25">
+				<div class="jumbotron border-15">
+					<h1 class="text-center title">Create User</h1>
+					<div class="row justify-content-md-center">
+						<div class="col-md-6">
+							<form class="container-form" method="post">
+								<h1 class="text-center pb-5 subtitle"></h1>
+								{% csrf_token %}
+								{{ form }}
+	
+								<div class="container-btn">
+									<button class="btn btn-primary badge-pill mb-4 text-btn" type="submit">Create</button>
+								</div>
+							</form><!-- /end form -->
+						</div><!-- /end col -->
+					</div><!-- /end body -->
+				</div><!-- /end row -->
+			</div><!-- /end jumbotron -->
+		</main><!-- /end main -->
+
+{% endblock%}

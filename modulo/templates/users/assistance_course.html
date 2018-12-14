@@ -1,0 +1,69 @@
+{%extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+<main>
+			<div class="container wrapper-25">
+				<div class="jumbotron border-15">
+					<h1 class="text-center title">Assistances</h1>
+					<div class="row justify-content-center">
+						<div class="col-md-2">
+							
+						<a href="/users/create-assistance/{{IdCourse}}/">
+						<button class="btn btn-primary" type="">
+							Create Assistences
+						</button>
+						</a>
+						
+						</div><!-- /end col -->
+					</div><!-- /end body -->
+					<div class="row justify-content-center">
+						<div class="col-md-4">
+							<table class="table table-bordered noticia">
+								<thead>
+									<tr>
+										
+										<td>Date</td>
+										<td>Options</td>
+										
+									</tr>
+								</thead>
+								<tbody>
+									{% if assistances %}
+									{% for assistance in assistances %}
+										<tr>
+											<td>{{assistance.Date}}</td>
+											<td>
+												<a href="/users/assistences-students/{{assistance.IdAssistance}}/">
+												<button class="btn btn-warning" type="">
+													Students
+												</button></a>
+											</td>							
+										</tr>
+									{% endfor %}
+									{% endif%}
+								</tbody>
+							</table>
+						</div><!-- /end col -->
+					</div>
+				</div><!-- /end row -->
+			</div><!-- /end jumbotron -->
+		</main><!-- /end main -->
+
+
+<section class="mision">
+		<div class="container texto-blanco ">
+			<section class="Jumbotron">
+				<h2 class="texto-blanco"></h2>
+			</section>
+
+			<p></p>
+
+			<section class="row justify-content-center">
+
+			<p></p>
+
+			
+			</section>
+		</div>
+	</section>
+{% endblock%}

@@ -1,0 +1,95 @@
+{%extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<main>
+			<div class="container wrapper-25">
+				<div class="jumbotron border-15">
+					<h1 class="text-center title">Assitence List</h1>
+					<div class="row justify-content-center">
+						<div class="col-md-2">
+							<a href="/users/create-assistance/{{IdCourse}}/">
+								<button class="btn btn-primary" type="">
+									Refresh Student List
+								</button>
+							</a>
+						</div><!-- /end col -->
+					</div><!-- /end body -->
+					<div class="row justify-content-center">
+						<div class="col-md-12">
+							<form method="POST" action="">
+				            {% csrf_token %}
+				            {{ form.as_p }}
+								<table class="table table-bordered noticia">
+									<thead>
+										<tr>
+											<td>username</td>
+											<td>Name1</td>
+											<td>Name2</td>
+											<td>Name3</td>
+											<td>LastName1</td>
+											<td>LastName2</td>
+											<td>Email</td>
+											<td>Phone</td>
+											<td>Assistance</td>
+											
+										</tr>
+									</thead>
+									<tbody>
+										{% if assistenceLists %}
+										{% for assistenceList in assistenceLists %}
+											<tr>
+												<td>{{assistenceList.FKLicence.username}}</td>
+												<td>{{assistenceList.FKLicence.Name1}}</td>
+												<td>{{assistenceList.FKLicence.Name2}}</td>
+												<td>{{assistenceList.FKLicence.Name3}}</td>
+												<td>{{assistenceList.FKLicence.LastName1}}</td>
+												<td>{{assistenceList.FKLicence.LastName2}}</td>
+												<td>{{assistenceList.FKLicence.Email}}</td>
+												<td>{{assistenceList.FKLicence.Phone}}</td>
+												<td>
+													{% if assistenceList.Estate == True %}
+				                     					<input type="checkbox" value='{{assistenceList.IdAssistanceList}}' 
+				                     					name='for_action' id='for_action' checked="">	
+				                     				{% else %}
+				                     					<input type="checkbox" value='{{assistenceList.IdAssistanceList}}' 
+				                     					name='for_action' id='for_action'>	
+				                     				{%endif%}
+												
+												</td>							
+											</tr>
+										{% endfor %}
+										{% endif%}
+									</tbody>
+								</table>
+								 <input type="submit" value="Save" class="btn btn-primary">
+							</form>
+						</div><!-- /end col -->
+					</div>
+				</div><!-- /end row -->
+			</div><!-- /end jumbotron -->
+		</main><!-- /end main -->
+
+<section class="mision">
+		<div class="container texto-blanco ">
+			<section class="Jumbotron">
+				<h2 class="texto-blanco"></h2>
+			</section>
+
+			<p></p>
+
+			<section class="row justify-content-center">
+
+				<a href="/users/refresh-list/{{IdAssistance}}/">
+
+				</a>
+						
+			<p> </p>
+			</section>
+			<p></p>
+			<section>
+			
+			</section>
+		</div>
+	</section>
+{% endblock%}

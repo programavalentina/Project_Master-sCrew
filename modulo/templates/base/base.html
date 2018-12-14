@@ -1,0 +1,108 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="icon" type="image/png" href="{% static 'images/icons/cohete.png'%}"/>
+		<!-- <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"/> -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"/>
+		<link rel="stylesheet" href="{% static 'styles.css'%}"/>
+	
+	<title>Master's Crew</title>
+</head>
+<body>
+	{% block header%}
+				<div id="sticky" class="nav-bar">
+			<div class="container">
+				<div class="justify-space-between align-items-center">
+					<div>
+						<a class="logo d-block" href="/">Master's Crew</a>
+					</div><!-- /end logo -->
+					<div>
+						<div id="btn-menu">
+							<span class="bars"></span>
+							<span class="bars"></span>
+							<span class="bars"></span>
+							<span class="bars"></span>
+						</div><!-- /end btn-menu -->
+						<nav>
+							<ul>
+								<li>
+									<a id="options-home" class="links hover-img" href="/">Home
+									</a>
+								</li>
+								{% if not user.is_authenticated %}
+								<li>
+									<a id="options-about" class="links hover-img" href="/users/register">Sign Up
+									</a>
+								</li>
+								{% endif%}
+
+								{% if user.is_authenticated %}
+								
+					        	{% if user.FKLicenceType.LicenceType == 9 %}
+					     		<li class="">
+					        		<a class="links hover-img" href="/users/administrator">Administrator <span class="sr-only">(current)</span></a>
+					      		</li>
+					      		{% endif %}
+					      		{% if user.FKLicenceType.LicenceType == 6 %}
+					      		<li class="nav-item active">
+					        		<a class="links hover-img" href="/users/supervisor">Supervisor <span class="sr-only">(current)</span></a>
+					      		</li>
+					      		{% endif %}
+
+					      		{% if user.FKLicenceType.LicenceType == 7 %}
+					      		<li class="nav-item active">
+					        		<a class="links hover-img" href="/users/teacher">Teacher <span class="sr-only">(current)</span></a>
+					      		</li>
+					      		{% endif %}
+
+					      		{% if user.FKLicenceType.LicenceType == 8 %}
+					      		<li class="">
+					        		<a class="links hover-img" href="/users/student">Student <span class="sr-only">(current)</span></a>
+					      		</li>
+					      		{% endif %}
+					      		<li>
+					      			<a class="links hover-img" href="/users/logout">Logout
+					      			</a>
+					      		</li>
+					  				
+						    	{% else %}
+						    	<li>
+						    		<a class="links hover-img" href="/users/login" >Login
+						      	</a>
+						    	</li>
+								
+						    	{% endif %}
+					      	</ul>
+						</nav><!-- /end nav -->
+					</div>
+				</div><!-- /end d-flex -->
+			</div><!-- /end container -->
+		</div><!-- /end nav-bar -->
+	{% endblock %}
+
+	{% block content %}
+	<h1>Body</h1>
+	{% endblock %}
+
+	{% block footer%}
+		<footer>
+			<div class="footer-container">
+				<div class="container">
+					<p class="text-footer">&copy; Master's Crew 2018 </p>
+				</div><!-- /end container -->
+			</div><!-- /end footer-container -->
+		</footer><!-- /end footer -->
+
+		<script src="{% static 'js/jquery.min.js'%}"></script>
+		<script src="{% static 'js/script.js'%}"></script>
+	{% endblock%}
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

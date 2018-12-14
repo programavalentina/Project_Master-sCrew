@@ -1,0 +1,33 @@
+{%extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+		<main>
+			<div class="container wrapper-25">
+				<div class="jumbotron border-15">
+					<h1 class="text-center title">Welcome @{{user.username}}</h1>
+					<div class="row">
+						<div class="col-md-4 d-none d-md-flex align-items-center">
+							<img class="bg-img hover-img" src="{% static 'images/icons/img-01.png' %}" alt="IMG"/>
+						</div><!-- /end col -->
+						<div class="col-md-8">
+							<h2 class="text-center mb-5">Here are your options, Good Luck!</h2>
+							<div class="container">
+								<div class="card-deck mb-3 text-center">
+								<div class="card mb-4 shadow-sm">
+								  <div class="card-header">
+								    <h4 class="my-0 font-weight-normal">Courses</h4>
+								  </div>
+								  <div class="card-body">
+								    <h1 class="card-title pricing-card-title"> <i class="fas fa-book"></i> </h1>
+								    <a class="btn btn-lg btn-block btn-primary hover-img" href="/users/courses">View</a>
+								  </div>
+								</div>
+								</div>
+							</div>
+						</div><!-- /end col -->
+					</div><!-- /end body -->
+				</div><!-- /end row -->
+			</div><!-- /end jumbotron -->
+		</main><!-- /end main -->
+{% endblock%}

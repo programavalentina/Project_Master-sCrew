@@ -1,0 +1,68 @@
+{%extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+		<main>
+			<div class="container wrapper-25">
+				<div class="jumbotron border-15">
+					<h1 class="text-center title">Users List</h1>
+					<div class="row justify-content-center">
+						<div class="col-md-2">
+							<a href="/users/create-user">
+								<button class="btn btn-primary" type="">
+									Create User
+								</button>
+							</a>
+						</div><!-- /end col -->
+					</div><!-- /end body -->
+					<div class="row justify-content-center">
+						<div class="col-bg-12">
+							<table style="background-color: #fff;" class="table table-bordered mt-3 noticia">
+								<thead>
+									<tr class="text-center">
+										<td>User</td>
+										<td>Name</td>
+										<td>Last Name</td>
+										<td>Birth Date</td>
+										<td>Email</td>
+										<td>Phone</td>
+										<td>Role</td>
+										<td>Options</td>
+										
+									</tr>
+								</thead>
+								<tbody>
+									{% if users%}
+									{% for user in users %}
+										<tr class="text-center">
+											
+											<td>{{user.username}}</td>
+											<td>{{user.Name1}}</td>
+											<td>{{user.LastName1}}</td>
+											<td>{{user.BirthDate}}</td>
+											<td>{{user.Email}}</td>
+											<td>{{user.Phone}}</td>
+											<td>{{user.FKLicenceType.Description}}</td>
+											<td>
+												<a href="/users/update-user/{{user.Licence}}/">
+												<button class="btn btn-info" type="">
+													Update
+												</button></a>
+												<a href="/users/delete-user/{{user.Licence}}/">
+												<button class="btn btn-warning" type="">
+													Delete
+												</button></a>
+
+											</td>
+										
+											
+										</tr>
+									{% endfor %}
+									{% endif%}
+								</tbody>
+							</table>
+						</div><!-- /end col -->
+					</div>
+				</div><!-- /end row -->
+			</div><!-- /end jumbotron -->
+		</main><!-- /end main -->
+{% endblock%}

@@ -1,0 +1,103 @@
+{%extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+		<main>
+			<div class="container wrapper-25">
+				<div class="jumbotron border-15">
+					<h1 class="text-center title">Courses List</h1>
+					<div class="row justify-content-center">
+						<div class="col-md-2">
+							{% if user.FKLicenceType.LicenceType == 9%}
+								<a href="/users/create-course">
+									<button class="btn btn-primary" type="">
+										Create Course
+									</button>
+								</a>
+							{% elif user.FKLicenceType.LicenceType == 8 %}
+								<a href="/users/assign-course">
+									<button class="btn btn-primary" type="">
+										Assign Course
+									</button>
+								</a>
+							{% endif %}
+						</div><!-- /end col -->
+					</div><!-- /end body -->
+					<div class="row justify-content-center">
+						<div class="col-md-12">
+							<table style="background-color: #fff;" class="table table-bordered mt-3">
+								<thead>
+									<tr class="text-center">
+										<td>Name</td>
+										<td>Description</td>
+										<td>Teacher</td>
+										<td>Options</td>
+									</tr>
+								</thead>
+								<tbody>
+									{% if user.FKLicenceType.LicenceType == 8%}
+										{% if assigns%}
+										{% for assign in assigns %}
+											<tr class="text-center">
+												<td>{{assign.FKIdCourse.NameCourse}}</td>
+												<td>{{assign.FKIdCourse.Description}}</td>
+												<td>{{assign.FKIdCourse.Teacher}}</td>
+												<td>
+													<a href="/users/delete-assign/{{assign.IdListStudents}}/"> 
+													<button class="btn btn-warning" type="">
+														Delete Assign
+													</button></a>							
+													
+												</td>
+											</tr>
+										{% endfor %}
+										{% endif%}
+
+									{% elif user.FKLicenceType.LicenceType == 9%}
+
+										{% if courses%}
+										{% for course in courses %}
+											<tr class="text-center">
+												<td>{{course.NameCourse}}</td>
+												<td>{{course.Description}}</td>
+												<td>{{course.Teacher}}</td>
+												<td>
+														<a href="/users/update-course/{{course.IdCourse}}/"> 
+														<button class="btn btn-info" type="">
+															Update
+														</button></a>
+														<a href="/users/delete-course/{{course.IdCourse}}/"> 
+														<button class="btn btn-warning" type="">
+															Delete
+														</button></a>
+													
+												</td>
+											</tr>
+										{% endfor %}
+										{% endif%}
+									{% elif user.FKLicenceType.LicenceType == 7%}
+										{% if courses%}
+										{% for course in courses %}
+											<tr class="text-center">
+												<td>{{course.NameCourse}}</td>
+												<td>{{course.Description}}</td>
+												<td>{{course.Teacher}}</td>
+												<td>
+														<a href="/users/assistance-course/{{course.IdCourse}}/"> 
+														<button class="btn btn-info" type="">
+															Assitance
+														</button>
+														</a>									
+												</td>
+											</tr>
+										{% endfor %}
+										{% endif%}
+									{% endif %}
+								</tbody>
+							</table>
+						</div><!-- /end col -->
+					</div>
+				</div><!-- /end row -->
+			</div><!-- /end jumbotron -->
+		</main><!-- /end main -->
+
+{% endblock%}
