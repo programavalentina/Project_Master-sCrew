@@ -9,13 +9,13 @@
 						<div class="col-md-2">
 							{% if user.FKLicenceType.LicenceType == 9%}
 								<a href="/users/create-course">
-									<button class="btn btn-primary" type="">
-										Create Course
+									<button class="btn btn-primary text-btn hover-img" type="">
+										Create New
 									</button>
 								</a>
 							{% elif user.FKLicenceType.LicenceType == 8 %}
 								<a href="/users/assign-course">
-									<button class="btn btn-primary" type="">
+									<button class="btn btn-success text-btn hover-img" type="">
 										Assign Course
 									</button>
 								</a>
@@ -24,8 +24,8 @@
 					</div><!-- /end body -->
 					<div class="row justify-content-center">
 						<div class="col-md-12">
-							<table style="background-color: #fff;" class="table table-bordered mt-3">
-								<thead>
+							<table style="background-color: #fff;" class="table table-bordered table-hover mt-3">
+								<thead style="background-color: #000; color: #fff;">
 									<tr class="text-center">
 										<td>Name</td>
 										<td>Description</td>
@@ -40,11 +40,11 @@
 											<tr class="text-center">
 												<td>{{assign.FKIdCourse.NameCourse}}</td>
 												<td>{{assign.FKIdCourse.Description}}</td>
-												<td>{{assign.FKIdCourse.Teacher}}</td>
+												<td>{{assign.FKIdCourse.Teacher.Name1}} {{assign.FKIdCourse.Teacher.LastName1}}</td>
 												<td>
 													<a href="/users/delete-assign/{{assign.IdListStudents}}/"> 
-													<button class="btn btn-warning" type="">
-														Delete Assign
+													<button class="btn btn-danger hover-img" type="">
+														<i style="width: 20px; height: 20px;" class="fas fa-times"></i>
 													</button></a>							
 													
 												</td>
@@ -59,15 +59,15 @@
 											<tr class="text-center">
 												<td>{{course.NameCourse}}</td>
 												<td>{{course.Description}}</td>
-												<td>{{course.Teacher}}</td>
+												<td>{{course.Teacher.Name1}} {{course.Teacher.LastName1}}</td>
 												<td>
 														<a href="/users/update-course/{{course.IdCourse}}/"> 
-														<button class="btn btn-info" type="">
-															Update
+														<button class="btn btn-secondary hover-img" type="">
+															<i style="width: 20px; height: 20px;" class="fas fa-edit"></i>
 														</button></a>
 														<a href="/users/delete-course/{{course.IdCourse}}/"> 
-														<button class="btn btn-warning" type="">
-															Delete
+														<button class="btn btn-danger hover-img" type="">
+															<i style="width: 20px; height: 20px;" class="fas fa-times"></i>
 														</button></a>
 													
 												</td>
@@ -80,11 +80,11 @@
 											<tr class="text-center">
 												<td>{{course.NameCourse}}</td>
 												<td>{{course.Description}}</td>
-												<td>{{course.Teacher}}</td>
+												<td>{{course.Teacher.Name1}} {{course.Teacher.LastName1}}</td>
 												<td>
 														<a href="/users/assistance-course/{{course.IdCourse}}/"> 
-														<button class="btn btn-info" type="">
-															Assitance
+														<button class="btn btn-info hover-img" type="">
+															<i style="width: 20px; height: 20px;" class="fas fa-user-check"></i>
 														</button>
 														</a>									
 												</td>

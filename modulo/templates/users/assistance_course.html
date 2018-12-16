@@ -4,23 +4,23 @@
 <main>
 			<div class="container wrapper-25">
 				<div class="jumbotron border-15">
-					<h1 class="text-center title">Assistances</h1>
+					<h1 class="text-center title">Assistances List</h1>
 					<div class="row justify-content-center">
 						<div class="col-md-2">
 							
 						<a href="/users/create-assistance/{{IdCourse}}/">
-						<button class="btn btn-primary" type="">
-							Create Assistences
+						<button class="btn btn-primary text-btn hover-img" type="">
+							Check Out Today
 						</button>
 						</a>
 						
 						</div><!-- /end col -->
 					</div><!-- /end body -->
 					<div class="row justify-content-center">
-						<div class="col-md-4">
-							<table class="table table-bordered noticia">
-								<thead>
-									<tr>
+						<div class="col-md-6">
+							<table style="background-color: #fff;" class="table table-bordered table-hover mt-3">
+								<thead style="background-color: #000; color: #fff;">
+									<tr class="text-center">
 										
 										<td>Date</td>
 										<td>Options</td>
@@ -30,11 +30,11 @@
 								<tbody>
 									{% if assistances %}
 									{% for assistance in assistances %}
-										<tr>
+										<tr class="text-center">
 											<td>{{assistance.Date}}</td>
 											<td>
 												<a href="/users/assistences-students/{{assistance.IdAssistance}}/">
-												<button class="btn btn-warning" type="">
+												<button class="btn btn-warning hover-img" type="">
 													Students
 												</button></a>
 											</td>							

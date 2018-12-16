@@ -5,31 +5,18 @@
 <main>
 			<div class="container wrapper-25">
 				<div class="jumbotron border-15">
-					<h1 class="text-center title">Assitence List</h1>
-					<div class="row justify-content-center">
-						<div class="col-md-2">
-							<a href="/users/create-assistance/{{IdCourse}}/">
-								<button class="btn btn-primary" type="">
-									Refresh Student List
-								</button>
-							</a>
-						</div><!-- /end col -->
-					</div><!-- /end body -->
+					<h1 class="text-center title">Students List</h1>
 					<div class="row justify-content-center">
 						<div class="col-md-12">
 							<form method="POST" action="">
 				            {% csrf_token %}
 				            {{ form.as_p }}
-								<table class="table table-bordered noticia">
-									<thead>
-										<tr>
-											<td>username</td>
-											<td>Name1</td>
-											<td>Name2</td>
-											<td>Name3</td>
-											<td>LastName1</td>
-											<td>LastName2</td>
+								<table style="background-color: #fff;" class="table table-bordered table-hover mt-3">
+									<thead style="background-color: #000; color: #fff;">
+										<tr class="text-center">
+											<td>Name</td>
 											<td>Email</td>
+											<td>DPI</td>
 											<td>Phone</td>
 											<td>Assistance</td>
 											
@@ -38,14 +25,10 @@
 									<tbody>
 										{% if assistenceLists %}
 										{% for assistenceList in assistenceLists %}
-											<tr>
-												<td>{{assistenceList.FKLicence.username}}</td>
-												<td>{{assistenceList.FKLicence.Name1}}</td>
-												<td>{{assistenceList.FKLicence.Name2}}</td>
-												<td>{{assistenceList.FKLicence.Name3}}</td>
-												<td>{{assistenceList.FKLicence.LastName1}}</td>
-												<td>{{assistenceList.FKLicence.LastName2}}</td>
+											<tr class="text-center">
+												<td>{{assistenceList.FKLicence.Name1}} {{assistenceList.FKLicence.LastName1}}</td>
 												<td>{{assistenceList.FKLicence.Email}}</td>
+												<td>{{assistenceList.FKLicence.DPI}}</td>
 												<td>{{assistenceList.FKLicence.Phone}}</td>
 												<td>
 													{% if assistenceList.Estate == True %}
@@ -62,7 +45,17 @@
 										{% endif%}
 									</tbody>
 								</table>
-								 <input type="submit" value="Save" class="btn btn-primary">
+								<div class="row justify-content-center">
+									<div class="col-md-5">
+										
+									</div>
+									<div class="col-md-2">
+										<input type="submit" value="Save" class="btn btn-primary badge-pill mb-4 text-btn hover-img">
+									</div>
+									<div class="col-md-5">
+										
+									</div>
+								</div>
 							</form>
 						</div><!-- /end col -->
 					</div>

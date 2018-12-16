@@ -9,12 +9,12 @@
 						<div class="col-md-6">
 							
 							<form class="container-form" method="post">
-								<h4>Desea eliminar el Curso {{object.NameCourse}}  </h4>
+								<h4>Do you want to delete {{object.NameCourse}} course? </h4>
 								{% csrf_token %}
 								{{ form }}
 	
-								<div class="container-btn">
-									<button class="btn btn-warning badge-pill mb-4 text-btn" type="submit">Delete</button>
+								<div class="container-btn mt-5">
+									<button class="btn btn-danger badge-pill mb-4 text-btn" type="submit">Delete</button>
 								</div>
 							</form><!-- /end form -->
 						</div><!-- /end col -->

@@ -6,9 +6,43 @@
 			<div class="container wrapper-25">
 				<div class="jumbotron border-15">
 					<h1 class="text-center title">Welcome @{{user.username}}</h1>
-					<div class="row">
-						<div class="col-md-4 d-none d-md-flex align-items-center">
-							<img class="bg-img hover-img" src="{% static 'images/icons/img-01.png' %}" alt="IMG"/>
+					<div class="row align-items-center">
+						<div class="col-md-4">
+							<ul class="ul-radius list-group">
+	                            <li class="list-group-item">
+	                                <div class="d-flex justify-content-center align-items-center ">
+	                                    <img style="height: 200px; width: 200px; border-radius: 50%;" class="bg-img hover-img" src="/../static/media/{{ user.Photo }}" alt=""/>
+	                                </div>
+	                            </li>
+	                            <li class="list-group-item d-flex justify-content-between align-items-center lh-condensed">
+	                                <div>
+	                                    <h6 class="my-0">Name</h6>
+	                                    <small class="text-muted">{{ user.Name1 }} {{ user.LastName1 }}</small>
+	                                </div>
+	                                <i class="icons fas fa-user"></i>
+	                            </li>
+	                            <li class="list-group-item d-flex justify-content-between align-items-center lh-condensed">
+	                                <div>
+	                                    <h6 class="my-0">E-Mail</h6>
+	                                    <small class="text-muted"> {{ user.Email }} </small>
+	                                </div>
+	                                <i class="icons fas fa-at"></i>
+	                            </li>
+	                            <li class="list-group-item d-flex justify-content-between align-items-center lh-condensed">
+	                                <div>
+	                                    <h6 class="my-0">DPI</h6>
+	                                    <small class="text-muted"> {{ user.DPI }} </small>
+	                                </div>
+	                                <i class="icons far fa-address-card"></i>
+	                            </li>
+	                            <li class="list-group-item d-flex justify-content-between align-items-center lh-condensed">
+	                                <div>
+	                                    <h6 class="my-0">Phone</h6>
+	                                    <small class="text-muted"> {{ user.Phone }} </small>
+	                                </div>
+	                                <i class="icons fas fa-phone"></i>
+	                            </li>
+	                        </ul>
 						</div><!-- /end col -->
 						<div class="col-md-8">
 							<h2 class="text-center mb-5">Here are your options, Good Luck!</h2>
@@ -20,7 +54,7 @@
 								  </div>
 								  <div class="card-body">
 								    <h1 class="card-title pricing-card-title"> <i class="fas fa-users-cog"></i> </h1>
-								    <a class="btn btn-lg btn-block btn-primary hover-img" href="/users/types">View</a>
+								    <a class="btn btn-lg btn-block btn-primary badge-pill hover-img" href="/users/types">View</a>
 								  </div>
 								</div>
 								<div class="card mb-4 shadow-sm">
@@ -29,7 +63,7 @@
 								  </div>
 								  <div class="card-body">
 								    <h1 class="card-title pricing-card-title"> <i class="fas fa-book"></i> </h1>
-								    <a class="btn btn-lg btn-block btn-primary hover-img" href="/users/courses">View</a>
+								    <a class="btn btn-lg btn-block btn-primary badge-pill hover-img" href="/users/courses">View</a>
 								  </div>
 								</div>
 								<div class="card mb-4 shadow-sm">
@@ -38,7 +72,7 @@
 								  </div>
 								  <div class="card-body">
 								    <h1 class="card-title pricing-card-title"> <i class="fas fa-users"></i> </h1>
-								    <a class="btn btn-lg btn-block btn-primary hover-img" href="/users/users">View</a>
+								    <a class="btn btn-lg btn-block btn-primary badge-pill hover-img" href="/users/users">View</a>
 								  </div>
 								</div>
 								</div>
