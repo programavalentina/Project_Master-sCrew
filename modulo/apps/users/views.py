@@ -6,6 +6,12 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import *
 from .models import *
+import cognitive_face as CF
+
+SUBSCRIPTION_KEY = 'KEY...'
+BASE_URL = 'https://eastus.api.cognitive.microsoft.com/face/v1.0'
+CF.BaseUrl.set(BASE_URL)
+CF.Key.set(SUBSCRIPTION_KEY)
 # Create your views here.
 
 def RegistroUsuario(request):
@@ -251,3 +257,35 @@ def assistences_students(request, pk):
         list_of_obj.update(Estate=True)
     assistencesLists = AssistanceList.objects.filter(FKIdAssistance=pk)
     return render(request, 'users/assistences_students.html', {'IdAssistance':pk,'assistenceLists':assistencesLists})
+
+def groups(request):
+    groups = Group.objects.all()
+    return render(request, 'users/groups.html', {'groups':groups})
+
+def create_group(request):
+    if request.method == 'POST':
+        form = GroupForm(request.POST)
+        if form.is_valid():
+            group = form.save(commit=False)
+            try:
+                CF.person_group.create(group.IdGroup, group.Name,group.Description)
+                if group.Default:
+                    print('Entro')
+                    dgroup = Group.objects.get(Default=True)
+                    dgroup.Default = False
+                    dgroup.save()
+                group.save()
+                return redirect('users:groups')
+            except Exception as e:
+                print(e)
+    form = GroupForm
+    return render(request, 'users/create_group.html', {'form':form})
+
+def persons(request, pk):
+    persons = Person.objects.filter(FKGroup=pk)
+    return render(request, 'users/persons.html', {'persons':persons})
+
+def faces(request, pk):
+    faces = Face.objects.filter(FKPerson=pk)
+    return render(request, 'users/faces.html', {'faces':faces})
+

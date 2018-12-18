@@ -1,0 +1,60 @@
+{%extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+		<main>
+			<div class="container wrapper-25">
+				<div class="jumbotron border-15">
+					<h1 class="text-center title">Groups</h1>
+					<div class="row justify-content-center">
+						<div class="col-md-2">
+                            {% if user.FKLicenceType.LicenceType == 9%}
+							    <a href="/users/create-group">
+									<button class="btn btn-primary text-btn hover-img" type="">
+										Create New
+									</button>
+								</a>
+							{% endif %}
+						</div><!-- /end col -->
+					</div><!-- /end body -->
+					<div class="row justify-content-center">
+						<div class="col-md-12">
+							<table style="background-color: #fff;" class="table table-bordered table-hover mt-3">
+								<thead style="background-color: #000; color: #fff;">
+									<tr class="text-center">
+										<td>name</td>
+                                        <td>Description</td>
+                                        <td>Default</td>
+										<td>Options</td>
+									</tr>
+								</thead>
+								<tbody>
+									{% if user.FKLicenceType.LicenceType == 9%}
+										{% if groups %}
+                                            {% for group in groups %}
+                                                <tr class="text-center">
+                                                    <td>{{group.Name}}</td>
+                                                    <td>{{group.Description}}</td>
+                                                    <td>
+                                                        {% if group.Default %}
+                                                            Default
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <a href="/users/persons/{{group.IdGroup}}/"> 
+                                                            <button class="btn btn-secondary hover-img" type="">
+                                                                <i style="width: 20px; height: 20px;" class="fas fa-edit"></i>
+                                                            </button>
+                                                        </a>						
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+										{% endif%}
+									{% endif %}
+								</tbody>
+							</table>
+						</div><!-- /end col -->
+					</div>
+				</div><!-- /end row -->
+			</div><!-- /end jumbotron -->
+		</main><!-- /end main -->
+{% endblock%}

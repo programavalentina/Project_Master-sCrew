@@ -169,3 +169,23 @@ class CheckAssistanceForm():
         widgets = {
             'Estate' : widgets.Select(),
         }
+
+class GroupForm(forms.ModelForm):
+    class Meta:
+        model = Group
+        fields=[
+            'Name',
+            'Description',
+            'Default',
+        ]
+        labels={
+            'Name':'Name',
+            'Description':'Description',
+            'Default':'Default',
+        }
+
+        widgets={
+            'Name':widgets.TextInput(),
+            'Description':widgets.TextInput(),
+            'Default': widgets.CheckboxInput(),
+        }

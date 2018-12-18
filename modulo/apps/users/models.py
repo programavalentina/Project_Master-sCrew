@@ -79,7 +79,6 @@ class Course(models.Model):
     Description = models.TextField()
     Teacher = models.ForeignKey(User, limit_choices_to= {'FKLicenceType': 7}, on_delete=models.CASCADE, null=True, blank=True)
 
-
     def __str__(self):
         return self.NameCourse
 
@@ -99,3 +98,18 @@ class AssistanceList(models.Model):
     Estate = models.BooleanField('1 Assistence; 0 No Assistence', default=False)
     FKIdAssistance = models.ForeignKey(Assistance, on_delete=models.CASCADE)
 
+class Group(models.Model):
+    IdGroup = models.AutoField(primary_key=True)
+    Name = models.CharField(max_length=50, null=False, blank=False)
+    Description = models.TextField(null=True, blank=True)
+    Default = models.BooleanField(default=False, blank=False, null=False)
+
+class Person(models.Model):
+    IdPerson = models.AutoField(primary_key=True)
+    FKLicence = models.ForeignKey(User, null=False, blank=False, on_delete=True)
+    FKGroup = models.ForeignKey(Group, null=False, blank=False, on_delete=True)
+
+class Face(models.Model):
+    IdFace = models.AutoField(primary_key=True)
+    FKPerson = models.ForeignKey(Person, null=False, blank=False, on_delete=True)
+    Image = models.ImageField(upload_to='faces/', blank=True, null=False, verbose_name='Image')

@@ -27,10 +27,12 @@ urlpatterns = [
     path('update-type/<int:pk>/', login_required(views.UpdateUserType.as_view(), 'modulo:index', '/users/login'), name='update-type'),
     path('delete-type/<int:pk>/', login_required(views.DeleteType.as_view(), 'modulo:index', '/users/login'), name='delete-type'),
     path('assign-course', login_required(views.assigncourse, 'modulo:index', '/users/login'), name='assign-course'),
-    path('delete-assign/<int:pk>/', login_required(views.DeleteAssign.as_view(), 'modulo:index', '/users/login.html'), name='delete-assign'),
-    path('assistance-course/<int:pk>/', login_required(views.assistance_course, 'modulo:index', '/users/login/html'), name='assitance-course'),
-    path('create-assistance/<int:pk>/', login_required(views.create_assistance, 'modulo:index', '/users/login.html'), name='create-assistance'),
-    path('assistences-students/<int:pk>/', login_required(views.assistences_students, 'modulo:index', '/users/login.html'), name='assistences_students'),
-    ]
-
-
+    path('delete-assign/<int:pk>/', login_required(views.DeleteAssign.as_view(), 'modulo:index', '/users/login'), name='delete-assign'),
+    path('assistance-course/<int:pk>/', login_required(views.assistance_course, 'modulo:index', '/users/login'), name='assitance-course'),
+    path('create-assistance/<int:pk>/', login_required(views.create_assistance, 'modulo:index', '/users/login'), name='create-assistance'),
+    path('assistences-students/<int:pk>/', login_required(views.assistences_students, 'modulo:index', '/users/login'), name='assistences_students'),
+    path('groups', login_required(views.groups, 'modulo:index', '/users/login'), name='groups'),
+    path('create-group', login_required(views.create_group, 'modulo:index', '/users/login'), name='create-group'),
+    path('persons/<int:pk>/', login_required(views.persons, 'modulo:index', '/users/login'), name='persons'),
+    path('faces/<int:pk>/', login_required(views.faces, 'modulo:index', '/users/login'), name='faces'),
+]
