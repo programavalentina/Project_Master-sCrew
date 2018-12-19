@@ -1,10 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{%extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+		<main>
+			<div class="container wrapper-25">
+				<div class="jumbotron border-15">
+					<h1 class="text-center title">Persons</h1>
+					<div class="row justify-content-center">
+						<div class="col-md-2">
+                            {% if user.FKLicenceType.LicenceType == 9%}
+							    <a href="/users/create-person">
+									<button class="btn btn-primary text-btn hover-img" type="">
+										Create New
+									</button>
+								</a>
+							{% endif %}
+						</div><!-- /end col -->
+					</div><!-- /end body -->
+					<div class="row justify-content-center">
+						<div class="col-md-12">
+							<table style="background-color: #fff;" class="table table-bordered table-hover mt-3">
+								<thead style="background-color: #000; color: #fff;">
+									<tr class="text-center">
+										<td>username</td>
+                                        
+										<td>Options</td>
+									</tr>
+								</thead>
+								<tbody>
+									{% if user.FKLicenceType.LicenceType == 9%}
+										{% if persons %}
+                                            {% for person in persons %}
+                                                <tr class="text-center">
+                                                    <td>{{person.FKLicence.username}}</td>
+                                                    <td>
+                                                        <a href="/users/faces/{{person.IdPerson}}/"> 
+                                                            <button class="btn btn-secondary hover-img" type="">
+                                                                <i style="width: 20px; height: 20px;" class="fas fa-edit"></i>
+                                                            </button>
+														</a>	
+														<a href="/users/delete-person/{{person.IdPerson}}/"> 
+															<button class="btn btn-danger hover-img" type="">
+																<i style="width: 20px; height: 20px;" class="fas fa-times"></i>
+															</button></a>					
+													</td>
+													
+                                                </tr>
+                                            {% endfor %}
+										{% endif%}
+									{% endif %}
+								</tbody>
+							</table>
+						</div><!-- /end col -->
+					</div>
+				</div><!-- /end row -->
+			</div><!-- /end jumbotron -->
+		</main><!-- /end main -->
+{% endblock%}

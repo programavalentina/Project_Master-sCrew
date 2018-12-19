@@ -1,19 +1,20 @@
 {%extends 'base/base.html' %}
 {% load staticfiles %}
 {% block content %}
-
 		<main>
 			<div class="container wrapper-25">
 				<div class="jumbotron border-15">
-					<h1 class="text-center title">Update User</h1>
+					<h1 class="text-center title">Create Face</h1>
 					<div class="row justify-content-md-center">
+						
 						<div class="col-md-6">
 							<form class="container-form" method="post" enctype="multipart/form-data">
 								<h1 class="text-center pb-5 subtitle"></h1>
 								{% csrf_token %}
 								{{ form }}
+	
 								<div class="container-btn">
-									<button class="btn btn-primary badge-pill mb-4 text-btn" type="submit">Save</button>
+									<button class="btn btn-primary badge-pill mb-4 text-btn" type="submit">Create</button>
 								</div>
 							</form><!-- /end form -->
 						</div><!-- /end col -->
@@ -21,5 +22,6 @@
 				</div><!-- /end row -->
 			</div><!-- /end jumbotron -->
 		</main><!-- /end main -->
+
 {% endblock%}
 

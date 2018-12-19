@@ -1,3 +1,5 @@
+from builtins import Exception
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
@@ -8,7 +10,7 @@ from .forms import *
 from .models import *
 import cognitive_face as CF
 
-SUBSCRIPTION_KEY = 'KEY...'
+SUBSCRIPTION_KEY = ''
 BASE_URL = 'https://eastus.api.cognitive.microsoft.com/face/v1.0'
 CF.BaseUrl.set(BASE_URL)
 CF.Key.set(SUBSCRIPTION_KEY)
@@ -21,6 +23,27 @@ def RegistroUsuario(request):
             post = form.save(commit=False)
             post.FKLicenceType = UserType.objects.get(LicenceType=8)
             post.save()
+            group = Group.objects.get(Default=True)
+            if group:
+                try:
+                    response = CF.person.create(group.IdGroup, post.username, post.DPI)
+                    person = Person()
+                    person.FKLicence = User.objects.get(DPI=post.DPI)
+                    person.FKGroup = group
+                    person.IdPersonApi = response['personId']
+                    person.save()
+                    #Person created
+                    #Now Add Face
+                    response2 = CF.person.add_face(post.Photo, group.IdGroup, response['personId'])
+                    face = Face()
+                    face.FKPerson = person
+                    face.Image = post.Photo
+                    face.PersistedFaceId = response2['persistedFaceId']
+                    face.save()
+
+                    trainDefaultGroup()
+                except Exception as e:
+                    print(e)
             return redirect('users:login')
         return render(request, 'users/register.html', {'form': form})
     form = RegisterForm
@@ -77,7 +100,10 @@ def teacher(request):
 def student(request):
     if request.user.FKLicenceType.LicenceType == 8:
         # Estudiante
-        return render(request, 'users/student.html')
+        group = Group.objects.get(Default=True)
+        persons = Person.objects.filter(FKLicence=request.user.Licence, FKGroup=group.IdGroup)
+        person = persons[0]
+        return render(request, 'users/student.html', {'person':person})
     if request.user.FKLicenceType.LicenceType == 7:
         # Teacher
         return redirect('users:teacher')
@@ -168,7 +194,6 @@ class UpdateUser(UpdateView):
     form_class = UserForm
     success_url = reverse_lazy('users:users')
     template_name = 'users/update_user.html'
-
 
 class DeleteUser(DeleteView):
     model = User
@@ -267,19 +292,35 @@ def create_group(request):
         form = GroupForm(request.POST)
         if form.is_valid():
             group = form.save(commit=False)
+            group.save()
             try:
-                CF.person_group.create(group.IdGroup, group.Name,group.Description)
+                print(group.IdGroup)
+                CF.person_group.create(group.IdGroup, group.Name, group.Description)
                 if group.Default:
                     print('Entro')
                     dgroup = Group.objects.get(Default=True)
                     dgroup.Default = False
                     dgroup.save()
-                group.save()
+
                 return redirect('users:groups')
             except Exception as e:
                 print(e)
+                group.delete()
     form = GroupForm
     return render(request, 'users/create_group.html', {'form':form})
+
+def delete_group(request, pk):
+    user = request.user
+    if user.FKLicenceType.LicenceType == 9:
+        try:
+            CF.person_group.delete(pk)
+        except Exception as e:
+            print(e)
+        group = Group.objects.filter(IdGroup=pk)
+        group.delete()
+        return redirect('users:groups')
+    auth.logout(request)
+    return redirect('users:login')
 
 def persons(request, pk):
     persons = Person.objects.filter(FKGroup=pk)
@@ -289,3 +330,39 @@ def faces(request, pk):
     faces = Face.objects.filter(FKPerson=pk)
     return render(request, 'users/faces.html', {'faces':faces})
 
+def create_face(request):
+    if request.method == 'POST':
+        form = FaceForm(request.POST, request.FILES)
+        if form.is_valid():
+            group = Group.objects.get(Default=True)
+            persons = Person.objects.filter(FKLicence=request.user.Licence, FKGroup=group.IdGroup)
+            person = persons[0]
+            post = form.save(commit=False)
+            post.FKPerson = person
+            post.save()
+
+            face = Face.objects.get(IdFace=post.IdFace)
+            try:
+                response2 = CF.person.add_face(face.Image, group.IdGroup, person.IdPersonApi)
+                face.PersistedFaceId = response2['persistedFaceId']
+                face.save()
+                #Train
+                trainDefaultGroup()
+            except Exception as e:
+                print(e)
+                face.delete()
+            return redirect('users:faces', pk=person.IdPerson)
+    form = FaceForm
+    return render(request, 'users/create_face.html', {'form':form})
+
+
+def trainDefaultGroup():
+    group = Group.objects.get(Default=True)
+    try:
+        CF.person_group.train(group.IdGroup)
+        while True:
+            response = CF.person_group.get_status(group.IdGroup)
+            if response['status'] == 'succeeded':
+                break
+    except Exception as e:
+        print(e)

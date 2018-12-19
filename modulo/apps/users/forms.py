@@ -189,3 +189,19 @@ class GroupForm(forms.ModelForm):
             'Description':widgets.TextInput(),
             'Default': widgets.CheckboxInput(),
         }
+
+class FaceForm(forms.ModelForm):
+    class Meta:
+        model = Face
+        fields = [
+            'Image'
+        ]
+
+        labels = {
+            'Image':'Image'
+        }
+
+        widgets = {
+            'Image':widgets.FileInput()
+        }
+

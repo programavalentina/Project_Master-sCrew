@@ -44,8 +44,13 @@
                                                             <button class="btn btn-secondary hover-img" type="">
                                                                 <i style="width: 20px; height: 20px;" class="fas fa-edit"></i>
                                                             </button>
-                                                        </a>						
-                                                    </td>
+														</a>	
+														<a href="/users/delete-group/{{group.IdGroup}}/"> 
+															<button class="btn btn-danger hover-img" type="">
+																<i style="width: 20px; height: 20px;" class="fas fa-times"></i>
+															</button></a>					
+													</td>
+													
                                                 </tr>
                                             {% endfor %}
 										{% endif%}

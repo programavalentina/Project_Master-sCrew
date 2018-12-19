@@ -107,9 +107,11 @@ class Group(models.Model):
 class Person(models.Model):
     IdPerson = models.AutoField(primary_key=True)
     FKLicence = models.ForeignKey(User, null=False, blank=False, on_delete=True)
-    FKGroup = models.ForeignKey(Group, null=False, blank=False, on_delete=True)
+    FKGroup = models.ForeignKey(Group, null=False, blank=False, on_delete=models.CASCADE)
+    IdPersonApi = models.CharField(max_length=30, blank=False, null=False)
 
 class Face(models.Model):
     IdFace = models.AutoField(primary_key=True)
-    FKPerson = models.ForeignKey(Person, null=False, blank=False, on_delete=True)
+    FKPerson = models.ForeignKey(Person, null=False, blank=False, on_delete=models.CASCADE)
     Image = models.ImageField(upload_to='faces/', blank=True, null=False, verbose_name='Image')
+    PersistedFaceId = models.CharField(max_length=30, blank=True, null=True)

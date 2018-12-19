@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{%extends 'base/base.html' %}
+{% load staticfiles %}
+{% block content %}
+		<main>
+			<div class="container wrapper-25">
+				<div class="jumbotron border-15">
+					<h1 class="text-center title">Faces</h1>
+					<div class="row justify-content-center">
+						<div class="col-md-2">
+                            {% if user.FKLicenceType.LicenceType == 8%}
+							    <a href="/users/create-face">
+									<button class="btn btn-primary text-btn hover-img" type="">
+										Create New
+									</button>
+								</a>
+							{% endif %}
+						</div><!-- /end col -->
+					</div><!-- /end body -->
+					<div class="row justify-content-center">
+						<div class="col-md-12">
+                            {% if user.FKLicenceType.LicenceType == 9 or user.FKLicenceType.LicenceType == 8%}
+                                {% if faces %}
+                                    {% for face in faces %}
+                                        <div class="card" style="width: 18rem;">
+                                            <img class="card-img-top" src="{% static 'media/'%}{{face.Image}}" alt="Card image cap">
+                                            <div class="card-body">
+                                            <a href="/users/delete-face/{{face.IdFace}}/"> 
+                                                <button class="btn btn-danger hover-img" type="">
+                                                    <i style="width: 20px; height: 20px;" class="fas fa-times"></i>
+                                                </button></a>
+                                            </div>
+                                        </div>                                                     
+                                    {% endfor %}
+                                {% endif%}
+                            {% endif %}		
+						</div><!-- /end col -->
+					</div>
+				</div><!-- /end row -->
+			</div><!-- /end jumbotron -->
+		</main><!-- /end main -->
+{% endblock%}

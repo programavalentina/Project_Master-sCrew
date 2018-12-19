@@ -32,7 +32,9 @@ urlpatterns = [
     path('create-assistance/<int:pk>/', login_required(views.create_assistance, 'modulo:index', '/users/login'), name='create-assistance'),
     path('assistences-students/<int:pk>/', login_required(views.assistences_students, 'modulo:index', '/users/login'), name='assistences_students'),
     path('groups', login_required(views.groups, 'modulo:index', '/users/login'), name='groups'),
+    path('delete-group/<int:pk>/', login_required(views.delete_group, 'modulo:index', '/users/login'), name='delete-group'),
     path('create-group', login_required(views.create_group, 'modulo:index', '/users/login'), name='create-group'),
     path('persons/<int:pk>/', login_required(views.persons, 'modulo:index', '/users/login'), name='persons'),
     path('faces/<int:pk>/', login_required(views.faces, 'modulo:index', '/users/login'), name='faces'),
+    path('create-face', login_required(views.create_face, 'modulo:index', '/users/login'), name='create-face'),
 ]
