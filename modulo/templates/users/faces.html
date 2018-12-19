@@ -4,7 +4,7 @@
 		<main>
 			<div class="container wrapper-25">
 				<div class="jumbotron border-15">
-					<h1 class="text-center title">Faces</h1>
+					<h1 class="text-center title">Face's {{user.Name1}} {{user.LastName1}}</h1>
 					<div class="row justify-content-center">
 						<div class="col-md-2">
                             {% if user.FKLicenceType.LicenceType == 8%}
@@ -16,24 +16,30 @@
 							{% endif %}
 						</div><!-- /end col -->
 					</div><!-- /end body -->
-					<div class="row justify-content-center">
-						<div class="col-md-12">
-                            {% if user.FKLicenceType.LicenceType == 9 or user.FKLicenceType.LicenceType == 8%}
+					<div class="row justify-content-center mt-5">
+						<div class="card">
+							<div class="card-body">
+								{% if user.FKLicenceType.LicenceType == 9 or user.FKLicenceType.LicenceType == 8%}
                                 {% if faces %}
-                                    {% for face in faces %}
+                                <div class="row justify-content-center">
+                                	{% for face in faces %}
+                                    <div class="col-md-4 mt-3">
                                         <div class="card" style="width: 18rem;">
-                                            <img class="card-img-top" src="{% static 'media/'%}{{face.Image}}" alt="Card image cap">
-                                            <div class="card-body">
+                                        	<div class="card-header text-right">
+                                            <img style="width: 250px; height: 250px; border-radius: 50%;" class="card-img-top" src="{% static 'media/'%}{{face.Image}}" alt="Card image cap">
                                             <a href="/users/delete-face/{{face.IdFace}}/"> 
-                                                <button class="btn btn-danger hover-img" type="">
+                                                <button class="btn btn-danger mt-3 hover-img" type="">
                                                     <i style="width: 20px; height: 20px;" class="fas fa-times"></i>
                                                 </button></a>
                                             </div>
-                                        </div>                                                     
+                                        </div>
+                                    </div><!-- /end col -->                                                     
                                     {% endfor %}
+                                </div>
                                 {% endif%}
                             {% endif %}		
-						</div><!-- /end col -->
+							</div>
+						</div>
 					</div>
 				</div><!-- /end row -->
 			</div><!-- /end jumbotron -->
