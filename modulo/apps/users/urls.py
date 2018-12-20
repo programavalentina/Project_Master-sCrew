@@ -37,4 +37,9 @@ urlpatterns = [
     path('persons/<int:pk>/', login_required(views.persons, 'modulo:index', '/users/login'), name='persons'),
     path('faces/<int:pk>/', login_required(views.faces, 'modulo:index', '/users/login'), name='faces'),
     path('create-face', login_required(views.create_face, 'modulo:index', '/users/login'), name='create-face'),
+    path('api/login', views.api_login, name='api_login'),
+    path('api/courses/<int:pk>/', views.api_coures, name='api_courses'),
+    path('api/assistances/<int:pk>/', views.api_assistances, name='api_assistances'),
+    path('api/create-assistance/<int:pk>/', views.api_create_assistance, name='api_assistances'),
+    path('api/assistance-list/<int:pk>/', views.api_assistancelist, name='api_assistancelist'),
 ]

@@ -9,8 +9,11 @@ from django.urls import reverse_lazy
 from .forms import *
 from .models import *
 import cognitive_face as CF
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import *
 
-SUBSCRIPTION_KEY = ''
+SUBSCRIPTION_KEY = '609619e29f6e4833a70db6c42cd2c7ab'
 BASE_URL = 'https://eastus.api.cognitive.microsoft.com/face/v1.0'
 CF.BaseUrl.set(BASE_URL)
 CF.Key.set(SUBSCRIPTION_KEY)
@@ -366,3 +369,58 @@ def trainDefaultGroup():
                 break
     except Exception as e:
         print(e)
+
+@api_view(['GET', 'POST'])
+def api_login(request):
+    if request.method=='POST':
+        serializer = LoginSerializer(data=request.data)
+        if serializer.is_valid():
+            auth_ = UserAuth()
+            user = auth_.authenticate(serializer.data['username'], serializer.data['password'])
+            if user:
+                userse = UserSerializer(user)
+                return Response(userse.data)
+    return Response({})
+
+@api_view(['GET', 'POST'])
+def api_coures(request, pk):
+    courses = Course.objects.filter(Teacher=pk)
+    serial = CourseSerializer(courses, many=True)
+    return Response(serial.data)
+
+@api_view(['GET', 'POST'])
+def api_assistances(request, pk):
+    assistances = Assistance.objects.filter(FKIdCourse=pk)
+    seria = AssitanceSerializer(assistances, many=True)
+    return Response(seria.data)
+
+@api_view(['GET', 'POST'])
+def api_create_assistance(request, pk):
+    date = datetime_safe.datetime.now().date()
+    assistances = Assistance.objects.filter(Date=date, FKIdCourse = pk)
+    if not assistances:
+        print('Crear Asistencia')
+        assistance = Assistance()
+        assistance.Date = date
+        assistance.FKIdCourse = Course.objects.get(IdCourse=pk)
+        assistance.save()
+        assigns = ListStudents.objects.filter(FKIdCourse=pk)
+        for assign in assigns:
+            assistancelist = AssistanceList()
+            assistancelist.Estate = False
+            assistancelist.FKLicence = assign.FKLicence
+            assistancelist.FKIdAssistance = assistance
+            assistancelist.save()
+            print(assistancelist)
+    for assistance in assistances:
+        print(assistance.Date)
+    assistances = Assistance.objects.filter(FKIdCourse=pk)
+    seria = AssitanceSerializer(assistances, many=True)
+    return Response(seria.data)
+
+@api_view(['GET', 'POST'])
+def api_assistancelist(request, pk):
+    assistancelist = AssistanceList.objects.filter(FKIdAssistance=pk)
+    serial = AssistanceListSerializer(assistancelist, many=True)
+    return Response(serial.data)
+

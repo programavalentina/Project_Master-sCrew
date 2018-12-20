@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.users',
     'apps.modulo',
+    'apps.api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +133,11 @@ LOGIN_REDIRECT_URL = reverse_lazy('users:profile')
 AUTH_USER_MODEL = 'users.User'
 AUTHENTICATION_BACKENDS = ('apps.users.backends.UserAuth',)
 
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': (
+       'rest_framework.permissions.AllowAny',
+    )
+}
