@@ -3,16 +3,21 @@
 {% block content %}
 		<main>
 			<div class="container wrapper-25">
-				<div class="jumbotron border-15">
-					<h1 class="text-center title">Persons</h1>
+				<div class="jumbotron mt-5 mb-5">
+					<h1 class="text-center title">Persons List</h1>
 					<div class="row justify-content-center">
-						<div class="col-md-2">
+						<div class="col-md-4">
                             {% if user.FKLicenceType.LicenceType == 9%}
-							    <a href="/users/create-person">
-									<button class="btn btn-primary text-btn hover-img" type="">
-										Create New
-									</button>
-								</a>
+                            	<div class="row justify-content-center">
+                            		<div class="col-md-6">
+                            			<a href="/users/groups" class="btn btn-success btn-block text-btn hover-img">Back</a>
+                            		</div>
+                            		<div class="col-md-6">
+                            			<a href="/users/create-person"class="btn btn-primary btn-block text-btn hover-img">
+											Create New
+										</a>
+                            		</div>
+                            	</div>
 							{% endif %}
 						</div><!-- /end col -->
 					</div><!-- /end body -->
@@ -21,7 +26,7 @@
 							<table style="background-color: #fff;" class="table table-bordered table-hover mt-3">
 								<thead style="background-color: #000; color: #fff;">
 									<tr class="text-center">
-										<td>username</td>
+										<td>Name</td>
                                         
 										<td>Options</td>
 									</tr>
@@ -31,11 +36,11 @@
 										{% if persons %}
                                             {% for person in persons %}
                                                 <tr class="text-center">
-                                                    <td>{{person.FKLicence.username}}</td>
+                                                    <td>{{person.FKLicence.Name1}} {{person.FKLicence.LastName1}}</td>
                                                     <td>
                                                         <a href="/users/faces/{{person.IdPerson}}/"> 
                                                             <button class="btn btn-secondary hover-img" type="">
-                                                                <i style="width: 20px; height: 20px;" class="fas fa-edit"></i>
+                                                                <i style="width: 20px; height: 20px;" class="fas fa-eye"></i>
                                                             </button>
 														</a>	
 														<a href="/users/delete-person/{{person.IdPerson}}/"> 

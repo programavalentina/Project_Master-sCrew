@@ -2,9 +2,9 @@
 {% load staticfiles %}
 {% block content %}
 
-<main>
+		<main>
 			<div class="container wrapper-25">
-				<div class="jumbotron border-15">
+				<div class="jumbotron mt-5 mb-5">
 					<h1 class="text-center title">Students List</h1>
 					<div class="row justify-content-center">
 						<div class="col-md-12">
@@ -46,14 +46,11 @@
 									</tbody>
 								</table>
 								<div class="row justify-content-center">
-									<div class="col-md-5">
-										
+									<div class="col-md-3">
+										<a href="/users/courses" class="btn btn-success btn-block badge-pill mb-4 text-btn hover-img">Back</a>
 									</div>
-									<div class="col-md-2">
-										<input type="submit" value="Save" class="btn btn-primary badge-pill mb-4 text-btn hover-img">
-									</div>
-									<div class="col-md-5">
-										
+									<div class="col-md-3">
+										<input type="submit" value="Save" class="btn btn-primary btn-block badge-pill mb-4 text-btn hover-img">
 									</div>
 								</div>
 							</form>
@@ -63,26 +60,26 @@
 			</div><!-- /end jumbotron -->
 		</main><!-- /end main -->
 
-<section class="mision">
-		<div class="container texto-blanco ">
-			<section class="Jumbotron">
-				<h2 class="texto-blanco"></h2>
-			</section>
+		<section class="mision">
+			<div class="container texto-blanco ">
+				<section class="Jumbotron">
+					<h2 class="texto-blanco"></h2>
+				</section>
 
-			<p></p>
+				<p></p>
 
-			<section class="row justify-content-center">
+				<section class="row justify-content-center">
 
-				<a href="/users/refresh-list/{{IdAssistance}}/">
+					<a href="/users/refresh-list/{{IdAssistance}}/">
 
-				</a>
-						
-			<p> </p>
-			</section>
-			<p></p>
-			<section>
-			
-			</section>
-		</div>
-	</section>
+					</a>
+							
+				<p> </p>
+				</section>
+				<p></p>
+				<section>
+				
+				</section>
+			</div>
+		</section>
 {% endblock%}

@@ -3,7 +3,7 @@
 {% block content %}
 		<main>
 			<div class="container wrapper-25">
-				<div class="jumbotron border-15">
+				<div class="jumbotron mt-5 mb-5">
 					<h1 class="text-center title">Create User</h1>
 					<div class="row justify-content-md-center">
 						<div class="col-md-6">
@@ -12,8 +12,13 @@
 								{% csrf_token %}
 								{{ form }}
 	
-								<div class="container-btn">
-									<button class="btn btn-primary badge-pill mb-4 text-btn" type="submit">Create</button>
+								<div class="row align-items-center">
+									<div class="col-md-6">
+										<a href="/users/users" class="btn btn-success btn-block badge-pill mb-4 text-btn">Back</a>
+									</div>
+									<div class="col-md-6">
+										<button class="btn btn-primary badge-pill mb-4 text-btn" type="submit">Create</button>
+									</div>
 								</div>
 							</form><!-- /end form -->
 						</div><!-- /end col -->

@@ -3,14 +3,18 @@
 {% block content %}
 		<main>
 			<div class="container wrapper-25">
-				<div class="jumbotron border-15">
-					<h1 class="text-center title">Face's {{user.Name1}} {{user.LastName1}}</h1>
+				<div class="jumbotron mt-5 mb-5">
+					<h1 class="text-center title">Photo's
+						{% if user.FKLicenceType.LicenceType == 8 %}
+							{{user.Name1}} {{user.LastName1}}
+						{% endif %}
+					</h1>
 					<div class="row justify-content-center">
 						<div class="col-md-2">
-                            {% if user.FKLicenceType.LicenceType == 8%}
+                            {% if user.FKLicenceType.LicenceType == 8 %}
 							    <a href="/users/create-face">
 									<button class="btn btn-primary text-btn hover-img" type="">
-										Create New
+										Add New
 									</button>
 								</a>
 							{% endif %}
@@ -19,18 +23,19 @@
 					<div class="row justify-content-center mt-5">
 						<div class="card">
 							<div class="card-body">
-								{% if user.FKLicenceType.LicenceType == 9 or user.FKLicenceType.LicenceType == 8%}
+							{% if user.FKLicenceType.LicenceType == 9 or user.FKLicenceType.LicenceType == 8%}
                                 {% if faces %}
                                 <div class="row justify-content-center">
                                 	{% for face in faces %}
-                                    <div class="col-md-4 mt-3">
+                                    <div class="col-md-4 mt-3 mb-3">
                                         <div class="card" style="width: 18rem;">
                                         	<div class="card-header text-right">
-                                            <img style="width: 250px; height: 250px; border-radius: 50%;" class="card-img-top" src="{% static 'media/'%}{{face.Image}}" alt="Card image cap">
-                                            <a href="/users/delete-face/{{face.IdFace}}/"> 
-                                                <button class="btn btn-danger mt-3 hover-img" type="">
-                                                    <i style="width: 20px; height: 20px;" class="fas fa-times"></i>
-                                                </button></a>
+                                            	<img style="width: 250px; height: 250px; border-radius: 15%;" class="card-img-top hover-img" src="{% static 'media/'%}{{face.Image}}" alt="Card image cap">
+                                            	<!-- Delete Photo Button
+	                                            <a href="/users/delete-face/{{face.IdFace}}/" class="btn btn-danger mt-3 hover-img">
+	                                                <i style="width: 20px; height: 20px;" class="fas fa-times"></i>
+	                                            </a>
+	                                            -->
                                             </div>
                                         </div>
                                     </div><!-- /end col -->                                                     
